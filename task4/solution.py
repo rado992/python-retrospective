@@ -44,41 +44,28 @@ class TicTacToeBoard:
         self.previous = value
 
     def check_win(self, player):
-
+        
+        triads = []
         if self.game_won:
             return False
 
         for i in ['A', 'B', 'C']:
-            self.win = True
-            for j in range(1, 4):
-                if self.fields[i][j] != player:
-                    self.win = False
-            if self.win:
-                self.game_won = True
+            triads += [[self.fields['A'][j] for j in range(1, 4)]]
 
         for j in range(1, 4):
-            self.win = True
-            for i in ['A', 'B', 'C']:
-                if self.fields[i][j] != player:
-                    self.win = False
-            if self.win:
-                self.game_won = True
+            triads += [[self.fields[i][j] for i in ['A', 'B', 'C']]]
 
-        self.win = True
+        primary_diag, secondary_diag = [], []
         for i, j in zip(('A', 'B', 'C'), (1, 2, 3)):
-            if self.fields[i][j] != player:
-                self.win = False
-        if self.win:
-            self.game_won = True
+            primary_diag += self.fields[i][j]
+            secondary_diag += self.fields[i][4 - j]
 
-        self.win = True
-        for i, j in zip(('A', 'B', 'C'), (3, 2, 1)):
-            if self.fields[i][j] != player:
-                self.win = False
-        if self.win:
-            self.game_won = True
-
+        triads = triads + [primary_diag] + [secondary_diag]
+        for triad in triads:
+            if set(triad) == {player}:
+                self.game_won = True
         return self.game_won
+
 
     def board_full(self):
         for i in ['A', 'B', 'C']:
