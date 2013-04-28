@@ -18,9 +18,9 @@ def iterate(func):
     for i in itertools.count():
         yield element
         element = compose(func, element)
-        
 
-def compose(func1,func2):
+
+def compose(func1, func2):
     return lambda *args: func1(func2(*args))
 
 
@@ -31,10 +31,8 @@ def zip_with(func, *args):
 
 
 def cache(func, levels):
-
     if levels <= 0:
         return func
-
     result_cache = OrderedDict()
 
     def func_cached(*args):
