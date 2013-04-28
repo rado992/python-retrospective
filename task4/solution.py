@@ -1,4 +1,4 @@
-import re
+from re import match
 
 
 class TicTacToeBoard:
@@ -32,7 +32,7 @@ class TicTacToeBoard:
         return None if field == ' ' else field
 
     def __setitem__(self, key, value):
-        if not (isinstance(key, str) and re.match(r'^[ABC][123]$', key)):
+        if not (isinstance(key, str) and match(r'^[ABC][123]$', key)):
             raise InvalidKey()
         if value != "X" and value != "O":
             raise InvalidValue()
@@ -44,7 +44,7 @@ class TicTacToeBoard:
         self.previous = value
 
     def check_win(self, player):
-        
+
         triads = []
         if self.game_won:
             return False
@@ -65,7 +65,6 @@ class TicTacToeBoard:
             if set(triad) == {player}:
                 self.game_won = True
         return self.game_won
-
 
     def board_full(self):
         for i in ['A', 'B', 'C']:
