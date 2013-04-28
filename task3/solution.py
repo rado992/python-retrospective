@@ -17,7 +17,7 @@ class Person:
         return False
 
     def sibling(self, other):
-        if(self.mother and self.father):      
+        if(self.mother and self.father):
             return self.mother == other.mother or self.father == other.father
         else:
             return False
