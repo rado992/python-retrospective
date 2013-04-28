@@ -32,6 +32,8 @@ class TicTacToeBoard:
         return None if field == ' ' else field
 
     def __setitem__(self, key, value):
+        if not isinstance(key, str):
+            raise InvalidKey()
         if not bool(re.search(r'^[ABC][123]$', key)):
             raise InvalidKey()
         if value != "X" and value != "O":
