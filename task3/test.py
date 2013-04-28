@@ -1,7 +1,6 @@
 import unittest
 
-#from . import solution
-import solution
+from . import solution
 
 
 class PersonTest(unittest.TestCase):

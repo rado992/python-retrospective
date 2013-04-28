@@ -1,7 +1,6 @@
 import unittest
 
-#rom . import solution
-import solution
+from . import solution
 
 
 class TicTacHomeworkTest(unittest.TestCase):
