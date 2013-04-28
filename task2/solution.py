@@ -30,15 +30,17 @@ def zip_with(func, *args):
     return iter(map(func, *args))
 
 
-CACHE = OrderedDict()
-
-
 def cache(func, levels):
 
+    if levels <= 0:
+        return func
+
+    result_cache = OrderedDict()
+
     def func_cached(*args):
-        if args not in CACHE:
-            if len(CACHE) >= levels:
-                CACHE.popitem(False)
-            CACHE[args] = func(*args)
-        return CACHE[args]
+        if args not in result_cache:
+            if len(result_cache) >= levels:
+                result_cache.popitem(False)
+            result_cache[args] = func(*args)
+        return result_cache[args]
     return func_cached
